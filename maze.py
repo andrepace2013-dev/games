@@ -1,6 +1,6 @@
 from turtle import*
 import time
-
+before=time.time()
 def create_maze():
     global finish
     for y in range(len(maze)):
@@ -32,12 +32,10 @@ def valide_move(x,y):
 def win():
     if p.distance(finish)<10:
         after=time.time()
-        duration=after-before
+        duration=round(after-before,2)
         p.hideturtle()
-        w.bye()
-        winn+=1
         print('Congradulations you completed the maze {} in time.'.format(duration))
-
+        w.bye()
 def move_up():
     p.setheading(90)
     x=p.xcor()
@@ -69,8 +67,6 @@ def move_left():
     if valide_move(x,y):
         p.goto(x,y)
         win()
-
-winn=0
 t=Turtle()
 t.speed(0)
 t.shape('square')
@@ -92,25 +88,18 @@ maze=['XXXXXXXXXXXXXX',
       'X X    XXXXXXX',
       'XXXXXX       X',
       'XXXXXXXXXXXX F']
-p=Turtle()
-p.shape('turtle')
-p.speed(1)
 o=[]
-before=time.time()
 w.listen()
 w.onkey(move_up,'Up')
 w.onkey(move_right,'Right')
 w.onkey(move_down,'Down')
 w.onkey(move_left,'Left')
-p.up()
+
 create_maze()
+
+p=Turtle()
+p.up()
+p.shape('turtle')
+p.speed(1)
 p.goto(-264,264)
-timer=0
-while True:
-    if winn==0:
-        time.sleep(1)
-        timer+=1
-    else:
-        print(timer)
-        break
 done()
