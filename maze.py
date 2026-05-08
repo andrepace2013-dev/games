@@ -36,37 +36,7 @@ def win():
         p.hideturtle()
         print('Congradulations you completed the maze {} in time.'.format(duration))
         w.bye()
-def move_up():
-    p.setheading(90)
-    x=p.xcor()
-    y=p.ycor()+24
-    if valide_move(x,y):    
-        p.goto(x,y)
-        win()
 
-def move_right():
-    p.setheading(0)
-    x=p.xcor()+24
-    y=p.ycor()
-    if valide_move(x,y):
-        p.goto(x,y)
-        win()
-
-def move_down():
-    p.setheading(270)
-    x=p.xcor()
-    y=p.ycor()-24
-    if valide_move(x,y):
-        p.goto(x,y)
-        win()
-
-def move_left():
-    p.setheading(180)
-    x=p.xcor()-24
-    y=p.ycor()
-    if valide_move(x,y):
-        p.goto(x,y)
-        win()
 t=Turtle()
 t.speed(0)
 t.shape('square')
@@ -89,17 +59,53 @@ maze=['XXXXXXXXXXXXXX',
       'XXXXXX       X',
       'XXXXXXXXXXXX F']
 o=[]
-w.listen()
-w.onkey(move_up,'Up')
-w.onkey(move_right,'Right')
-w.onkey(move_down,'Down')
-w.onkey(move_left,'Left')
+
 
 create_maze()
 
 p=Turtle()
 p.up()
 p.shape('turtle')
-p.speed(1)
+p.speed(0)
 p.goto(-264,264)
+def move_up():
+    p.setheading(90)
+    x=p.xcor()
+    y=p.ycor()+24
+    if valide_move(x,y):    
+        p.goto(x,y)
+        win()
+        time.sleep(0.1)
+
+def move_right():
+    p.setheading(0)
+    x=p.xcor()+24
+    y=p.ycor()
+    if valide_move(x,y):
+        p.goto(x,y)
+        win()
+        time.sleep(0.1)
+
+def move_down():
+    p.setheading(270)
+    x=p.xcor()
+    y=p.ycor()-24
+    if valide_move(x,y):
+        p.goto(x,y)
+        win()
+        time.sleep(0.1)
+
+def move_left():
+    p.setheading(180)
+    x=p.xcor()-24
+    y=p.ycor()
+    if valide_move(x,y):
+        p.goto(x,y)
+        win()
+        time.sleep(0.1)
+w.listen()
+w.onkey(move_up,'Up')
+w.onkey(move_right,'Right')
+w.onkey(move_down,'Down')
+w.onkey(move_left,'Left')
 done()
