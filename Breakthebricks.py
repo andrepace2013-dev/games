@@ -13,6 +13,7 @@ p.speed(0)
 p.goto(0, -180)
 p_width=120
 b=Turtle()
+S=Turtle()
 b.shape("circle")
 b.color("red")
 b.penup()
@@ -32,19 +33,19 @@ for row in range(4):
         brick.goto(col, 150 - (row*30))
         bricks.append(brick)
 def score():
-    w.clear()
-    time.sleep(1.5)
-    w.write('Score:{}'.format(Score),font=("Arial",16,"normal"),align='left')
+    S.clear()
+    S.color('white')
+    S.write('Score:{}'.format(Score),font=("Arial",16,"normal"),align='left')
 def start_game(x,y): 
     global game_started 
     game_started = True
 def left():
     x=p.xcor()
-    if x>-200:
+    if x>-280:
         p.setx(x-10)
 def right():
     x=p.xcor()
-    if x<200:
+    if x<280:
         p.setx(x+10)
 w.listen()
 w.onkey(left,'Left')
@@ -59,4 +60,23 @@ while True:
         # Move the ball
     b.setx(b.xcor() + b.dx) 
     b.sety(b.ycor() + b.dy)
+    if b.xcor()>290 or b.xcor()<-290:
+        b.dx*=-1
+    if b.ycor()>190:
+        b.dy*=-1
+    if b.ycor()<-190:
+        b.goto(0,0)
+        b.dy*=-1
+        game_started=False
+        Score=0
+        score()
+    if(b.ycor()>-180 and b.ycor()<-170) and (p.xcor() - p_width // 2 < b.xcor() < p.xcor() + p_width // 2):
+        b.dy *= -1
+    for i in bricks:
+        if abs(b.xcor()-i.xcor())<40 and abs(b.ycor()-i.ycor())<15:
+            b.dy*=-1
+            i.hideturtle()
+            bricks.remove(i)
+            Score+=10
+            score()
 done()
